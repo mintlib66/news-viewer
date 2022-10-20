@@ -35,6 +35,12 @@ function App() {
           readOnly={true}
         ></textarea>
       )}
+      <div>
+        {data &&
+          data.articles.map(item => {
+            return <NewsItem article={item}></NewsItem>
+          })}
+      </div>
     </div>
   )
 }
