@@ -2,19 +2,30 @@ import React from 'react'
 import styled from 'styled-components'
 
 const NewsItemWrap = styled.div`
-  margin: 1rem auto;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  align-items: center;
+  padding: 0.5rem;
 
   border-bottom: 1px solid grey;
-  max-width: 800px;
 
   a {
     color: black;
   }
 
-  & + & {
-    margin-top: 3rem;
+  .thumbnail img {
+    width: 160px;
+    margin-right: 0.5rem;
+  }
+  .contents {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+
+    & h3,
+    & p {
+      margin: 0.5rem 0;
+    }
   }
 `
 
