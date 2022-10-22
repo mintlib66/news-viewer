@@ -1,10 +1,10 @@
 import React from 'react'
 import styled from 'styled-components'
 
-const NewsItemWrap = styled.div`
+const NewsItemBlock = styled.div`
   display: flex;
   flex-direction: row;
-  align-items: center;
+  align-items: flex-start;
   padding: 0.5rem;
 
   border-bottom: 1px solid grey;
@@ -32,7 +32,7 @@ const NewsItemWrap = styled.div`
 function NewsItem({ article }) {
   const { title, description, url, urlToImage } = article
   return (
-    <NewsItemWrap>
+    <NewsItemBlock>
       {urlToImage && (
         <div className="thumbnail">
           <a href={url} rel="noreferrer noopener">
@@ -46,7 +46,7 @@ function NewsItem({ article }) {
         </a>
         <p>{description}</p>
       </div>
-    </NewsItemWrap>
+    </NewsItemBlock>
   )
 }
 

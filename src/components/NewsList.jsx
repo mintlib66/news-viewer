@@ -4,7 +4,7 @@ import NewsItem from './NewsItem'
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 
-const NewsListWrap = styled.div`
+const NewsListBlock = styled.div`
   box-sizing: border-box;
   max-width: 800px;
   margin: 0 auto;
@@ -16,17 +16,18 @@ const NewsListWrap = styled.div`
   }
 `
 
-function NewsList() {
-  const API_KEY = process.env.REACT_APP_NEWS_API_KEY
+function NewsList({ category }) {
   const [articles, setArticles] = useState(null)
   const [loading, setLoading] = useState(false)
 
   useEffect(() => {
+    const NEWS_API_KEY = process.env.REACT_APP_NEWS_API_KEY
     const fetchData = async () => {
       setLoading(true)
       try {
+        const query = category === 'all' ? '' : `&category=${category}`
         const res = await axios.get(
-          `https://newsapi.org/v2/top-headlines?country=kr&apiKey=${API_KEY}`
+          `https://newsapi.org/v2/top-headlines?country=kr${query}&apiKey=${NEWS_API_KEY}`
         )
         setArticles(res.data.articles)
       } catch (e) {
@@ -35,7 +36,7 @@ function NewsList() {
       setLoading(false)
     }
     fetchData()
-  }, [])
+  }, [category])
 
   if (loading) {
     return <NewsList>불러오는 중...</NewsList>
@@ -44,11 +45,11 @@ function NewsList() {
     return null
   }
   return (
-    <NewsListWrap>
-      {articles.map(item => {
-        return <NewsItem article={item} key={item.url}></NewsItem>
+    <NewsListBlock>
+      {articles.map(article => {
+        return <NewsItem article={article} key={article.url}></NewsItem>
       })}
-    </NewsListWrap>
+    </NewsListBlock>
   )
 }
 
