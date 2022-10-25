@@ -1,5 +1,6 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
+import { NavLink } from 'react-router-dom'
 
 const categories = [
   { name: 'all', text: '전체보기' },
@@ -21,7 +22,7 @@ const CategoriesBlock = styled.div`
     overflow-x: auto;
   }
 `
-const Category = styled.div`
+const Category = styled(NavLink)`
   cursor: pointer;
   white-space: pre;
   padding-bottom: 0.25rem;
@@ -44,15 +45,15 @@ const Category = styled.div`
       }
     `}
 `
-function Categories({ categorySelect, onSelect }) {
+function Categories() {
   return (
     <CategoriesBlock>
       {categories.map(item => {
         return (
           <Category
             key={item.name}
-            active={categorySelect === item.name}
-            onClick={() => onSelect(item.name)}
+            className={'active'}
+            to={item.name === 'all' ? '/' : `/${item.name}`}
           >
             {item.text}
           </Category>
