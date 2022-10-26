@@ -1,5 +1,5 @@
 import React from 'react'
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 import { NavLink } from 'react-router-dom'
 
 const categories = [
@@ -29,21 +29,19 @@ const Category = styled(NavLink)`
   text-decoration: none;
 
   &:hover {
-    color: #495057;
+    color: #61809e;
   }
   & + & {
     margin-left: 1rem;
   }
-  ${props =>
-    props.active &&
-    css`
-      font-weight: 600;
-      color: #22b8cf;
-      text-decoration: underline;
-      &:hover {
-        color: #3bc9db;
-      }
-    `}
+  &.active {
+    font-weight: 600;
+    color: #22b8cf;
+    text-decoration: underline;
+    &:hover {
+      color: #3bc9db;
+    }
+  }
 `
 function Categories() {
   return (
@@ -52,7 +50,7 @@ function Categories() {
         return (
           <Category
             key={item.name}
-            className={'active'}
+            end={item.name === 'all'}
             to={item.name === 'all' ? '/' : `/${item.name}`}
           >
             {item.text}
