@@ -6,8 +6,9 @@ import NewsPage from './components/NewsPage'
 function App() {
   return (
     <Routes>
-      <Route path="/" exact element={<NewsPage />}></Route>
-      <Route path="/:category" element={<NewsPage />} />
+      <Route path="/" exact element={<NewsPage />} />
+      <Route path=":country" exact element={<NewsPage />} />
+      <Route path=":country/:category" element={<NewsPage />} />
     </Routes>
   )
 }

@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { NavLink } from 'react-router-dom'
+import CountrySelect from './CountrySelect'
 
 const categories = [
   { name: 'all', text: '전체보기' },
@@ -11,22 +12,27 @@ const categories = [
   { name: 'sports', text: '스포츠' },
   { name: 'technology', text: '기술' },
 ]
-
-const CategoriesBlock = styled.div`
+const CategoriesWrap = styled.div`
   display: flex;
-  padding: 1rem;
-  width: 800px;
-  margin: 0;
+  justify-content: space-between;
   @media screen and (max-width: 800px) {
     width: 100%;
     overflow-x: auto;
   }
+`
+
+const CategoriesBlock = styled.div`
+  display: flex;
+  padding: 1rem;
+  width: fit-content;
+  margin: 0;
 `
 const Category = styled(NavLink)`
   cursor: pointer;
   white-space: pre;
   padding-bottom: 0.25rem;
   text-decoration: none;
+  color: black;
 
   &:hover {
     color: #61809e;
@@ -43,21 +49,27 @@ const Category = styled(NavLink)`
     }
   }
 `
-function Categories() {
+
+function Categories({ country }) {
   return (
-    <CategoriesBlock>
-      {categories.map(item => {
-        return (
-          <Category
-            key={item.name}
-            end={item.name === 'all'}
-            to={item.name === 'all' ? '/' : `/${item.name}`}
-          >
-            {item.text}
-          </Category>
-        )
-      })}
-    </CategoriesBlock>
+    <CategoriesWrap>
+      <CategoriesBlock>
+        {categories.map(item => {
+          return (
+            <Category
+              key={item.name}
+              end={item.name === 'all'}
+              to={
+                item.name === 'all' ? `/${country}` : `/${country}/${item.name}`
+              }
+            >
+              {item.text}
+            </Category>
+          )
+        })}
+      </CategoriesBlock>
+      <CountrySelect />
+    </CategoriesWrap>
   )
 }
 

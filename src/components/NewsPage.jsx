@@ -5,13 +5,14 @@ import { useParams } from 'react-router-dom'
 
 function NewsPage() {
   const params = useParams()
+  const country = params.country || 'kr'
   const category = params.category || 'all'
-  console.log(category)
+  console.log(params)
 
   return (
     <div>
-      <Categories />
-      <NewsList category={category} />
+      <Categories country={country} />
+      <NewsList country={country} category={category} />
     </div>
   )
 }
